@@ -82,5 +82,26 @@ WHERE salary >
 (SELECT avg(salary) 
 FROM employee_info);
 
--- Q.8) 
+-- Q.8) Find the employees who earn the highest salary in each department
+-- First we will find the highest salary in each department 
+SELECT department, max(salary)
+FROM employee_info
+Group by department;
+-- Then we will filter according to names 
+SELECT * 
+FROM employee_info
+WHERE (department,salary) in 
+(SELECT department,max(salary) 
+FROM employee_info
+Group by department);
+
+-- ANOTHER APPROACH(better)
+SELECT * FROM employee_info E
+JOIN 
+(SELECT department,max(salary) as maxSalary
+FROM employee_info
+GROUP BY department) D
+ON E.department=D.department
+AND 
+E.salary=D.maxSalary; 
 
