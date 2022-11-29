@@ -80,6 +80,27 @@ SELECT DISTINCT E.ID, E.FirstName, E.LastName, E.DepartmentName
 FROM employees E , employees E1 -- here E and E1 are aliases and employees is our table name 
 WHERE E.DepartmentName=E1.DepartmentName 
 AND E.ID != E1.ID;
+
+-- How to capitalize FirstLetter of a String 
+CREATE TABLE Name (
+   FirstName varchar(255)
+);
+INSERT INTO Name (FirstName) VALUES ('sadu');
+INSERT INTO Name (FirstName) VALUES ('annie');
+INSERT INTO Name (FirstName) VALUES ('erikso');
+INSERT INTO Name (FirstName) VALUES ('tina');
+INSERT INTO Name (FirstName) VALUES ('ariana');
+
+SELECT FirstName, Upper(LEFT(FirstName,1))+SUBSTRING(FirstName,2,len(FirstName)) as name
+From db_employee.Name;
+
+SELECT LEFT(FirstName,1) From db_employee.Name; -- Extract first letter
+SELECT UPPER(LEFT(FirstName,1)) From db_employee.Name; -- capitailize the first letter
+SELECT UPPER(LEFT(FirstName,1)) + lower(substring(FirstName, 2, length(FirstName))); -- NOT GIVING CORRECT ANS
+
+Select FirstName, CONCAT(UPPER(LEFT(FirstName,1)),lower(substring(FirstName, 2, length(FirstName)))) 
+as Name From db_employee.Name; -- CORRECT ANS PRODUCED 
+
  
  
  
